@@ -5,9 +5,10 @@ import './TableWorkers.css'
 
 interface WorkersTableProps {
   workers: Worker[]
+  onToggleSidebar: () => void
 }
 
-export default function TableWorkers({ workers }: WorkersTableProps) {
+export default function TableWorkers({ workers, onToggleSidebar }: WorkersTableProps) {
   const columns: ColumnDef<Worker>[] = [
     {
       accessorKey: 'name',
@@ -40,6 +41,7 @@ export default function TableWorkers({ workers }: WorkersTableProps) {
       cell: ({ row }) => <div className="centered-cell number-value highlight">{row.original.salary.toFixed(2)}</div>,
     }
   ]
+  
   const table = useReactTable({
     data: workers,
     columns,
@@ -78,6 +80,7 @@ export default function TableWorkers({ workers }: WorkersTableProps) {
           ))}
         </tbody>
       </table>
+      <button onClick={onToggleSidebar}>Открыть/закрыть сайдбар</button>
     </div>
   )
 }

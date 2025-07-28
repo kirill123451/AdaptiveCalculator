@@ -4,10 +4,9 @@ import type { Worker } from '../types'
 
 interface CalculatorProps {
   onAddWorker: (worker: Worker) => void
-  workers: Worker[]
 }
 
-export default function Calculator({ onAddWorker, workers }: CalculatorProps) {
+export default function Calculator({ onAddWorker }: CalculatorProps) {
     const [mode, setMode] = useState<string>('base')
     const [date, setDate] = useState<string>('')
     const [worker, setWorker] = useState<string>('')
@@ -160,21 +159,6 @@ export default function Calculator({ onAddWorker, workers }: CalculatorProps) {
                 ) : (
                     <span className="alt-mode">Привет2</span>
                 )}
-            </div>
-            <div className="workers-section">
-                <h2 className="workers-title">Список работников</h2>
-                <div className="workers-list">
-                    {workers.map((worker, index) => (
-                        <div key={index} className="worker-card">
-                            <h3 className="worker-name">{worker.name}</h3>
-                            <p className="worker-info">Дата: {worker.date}</p>
-                            <p className="worker-info">Выручка: {worker.cash.toFixed(2)}</p>
-                            <p className="worker-info">Ставка: {worker.bet.toFixed(2)}</p>
-                            <p className="worker-info">Процент: {worker.percent}%</p>
-                            <p className="worker-salary">Зарплата: {worker.salary.toFixed(2)}</p>
-                        </div>
-                    ))}
-                </div>
             </div>
         </div>
     )

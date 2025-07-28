@@ -1,0 +1,109 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 320px;
+    background: #f5f7fa;
+    border-right: 1px solid #e1e5eb;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-out;
+    z-index: 100;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-toggle {
+    position: absolute;
+    right: -42px;
+    top: 20px;
+    width: 42px;
+    height: 42px;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.sidebar-toggle:hover {
+    background: #4338ca;
+}
+
+.side-calculators {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Стили для кнопок */
+.add-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.add-btn:hover {
+    background: #4338ca;
+}
+
+.delete-btn {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.delete-btn:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Стили для обертки калькулятора */
+.calculator-wrapper {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 280px;
+    }
+    
+    .sidebar-toggle {
+        right: -40px;
+        width: 40px;
+        height: 40px;
+    }
+}
