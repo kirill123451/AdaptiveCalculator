@@ -4,9 +4,10 @@ import type { Worker } from '../types'
 
 interface CalculatorProps {
   onAddWorker: (worker: Worker) => void
+  isSidebar?: boolean
 }
 
-export default function Calculator({ onAddWorker }: CalculatorProps) {
+export default function Calculator({ onAddWorker, isSidebar = false }: CalculatorProps) {
     const [mode, setMode] = useState<string>('base')
     const [date, setDate] = useState<string>('')
     const [worker, setWorker] = useState<string>('')
@@ -27,10 +28,10 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
         setSalary(calculatedSalary)
     }, [cash, bet, percent])
 
-    function handleChangeDate(e: React.ChangeEvent<HTMLInputElement>) {
-        const inputDate = e.target.value
-        const [year, month, day] = inputDate.split('-')
-        setDate(`${day}.${month}.${year}`)
+    const formatDate = (dateString: string) => {
+        if (!dateString) return ''
+        const [year, month, day] = dateString.split('-')
+        return `${day}.${month}.${year}`
     }
 
     const calculateSalary = ({ cash, bet, percent }: { cash: number, bet: number, percent: number }) => {
@@ -45,7 +46,8 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
         const percentValue = percent === '' ? 0 : percent
         
         onAddWorker({
-            date,
+            id: Date.now(),
+            date: formatDate(date),
             name: worker,
             cash: cashValue as number,
             bet: betValue as number,
@@ -77,16 +79,18 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
     }
 
     return (
-        <div className="calculator-container">
+        <div className={`calculator-container ${isSidebar ? 'sidebar-mode' : ''}`}>
             <div className="form-section">
                 {mode === 'base' ? (
-                    <div className="input-form">
+                    <div className={`input-form ${isSidebar ? 'compact-form' : ''}`}>
                         <div className="input-group">
                             <label className="input-label">Дата:</label>
                             <input
                                 className="date-input"
                                 type="date"
-                                onChange={handleChangeDate}
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                style={{ boxSizing: 'border-box' }}
                             />
                         </div>
                         <div className="input-group">
@@ -97,10 +101,11 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
                                 value={worker}
                                 onChange={(e) => setWorker(e.target.value)}
                                 placeholder="Введите имя"
+                                style={{ boxSizing: 'border-box' }}
                             />
                         </div>
                         <div className="input-group">
-                            <label className="input-label">Выручка за день:</label>
+                            <label className="input-label">Выручка:</label>
                             <input 
                                 className="number-input"
                                 type="number"
@@ -108,6 +113,7 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
                                 onChange={handleCashChange}
                                 placeholder="0"
                                 min="0"
+                                style={{ boxSizing: 'border-box' }}
                             />
                         </div>
                         <div className="input-group">
@@ -119,6 +125,7 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
                                 onChange={handleBetChange}
                                 placeholder="0"
                                 min="0"
+                                style={{ boxSizing: 'border-box' }}
                             /> 
                         </div>
                         <div className="input-group">
@@ -131,21 +138,24 @@ export default function Calculator({ onAddWorker }: CalculatorProps) {
                                 placeholder="0"
                                 min="0"
                                 max="100"
+                                style={{ boxSizing: 'border-box' }}
                             />
                         </div>
                         <div className="button-group">
-                            <button 
-                                className="add-button-clear" 
-                                onClick={clearData}
-                            >
-                                Очистить
-                            </button>
+                            {!isSidebar && (
+                                <button 
+                                    className="add-button-clear" 
+                                    onClick={clearData}
+                                >
+                                    Очистить
+                                </button>
+                            )}
                             <button 
                                 className="add-button-complete" 
                                 onClick={addWorker}
                                 disabled={!worker || !date}
                             >
-                                Добавить работника
+                                {isSidebar ? 'Добавить' : 'Добавить работника'}
                             </button>
                         </div>
                         <div>

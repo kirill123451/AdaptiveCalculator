@@ -8,17 +8,17 @@ interface workers {
 export default function WorkerCard ({workers}:workers) {
 
     return (
-        <div className="workers-section">
-                <h2 className="workers-title">Список работников</h2>
-                <div className="workers-list">
+        <div className="wworkers-section">
+                <h2 className="wworkers-title">Список работников</h2>
+                <div className="wworkers-list">
                     {workers.map((worker, index) => (
-                        <div key={index} className="worker-card">
-                            <h3 className="worker-name">{worker.name}</h3>
-                            <p className="worker-info">Дата: {worker.date}</p>
-                            <p className="worker-info">Выручка: {worker.cash.toFixed(2)}</p>
-                            <p className="worker-info">Ставка: {worker.bet.toFixed(2)}</p>
-                            <p className="worker-info">Процент: {worker.percent}%</p>
-                            <p className="worker-salary">Зарплата: {worker.salary.toFixed(2)}</p>
+                        <div key={index} className="wworker-card">
+                            <h3 className="wworker-name">{worker.name}</h3>
+                            <p className="wworker-info">Дата: {worker.date}</p>
+                            <p className="wworker-info">Выручка: {worker.cash.toFixed(2)}</p>
+                            <p className="wworker-info">Ставка: {worker.bet.toFixed(2)}</p>
+                            <p className="wworker-info">Процент: {worker.percent}%</p>
+                            <p className="wworker-salary">Зарплата: {worker.salary.toFixed(2)}</p>
                         </div>
                     ))}
                 </div>

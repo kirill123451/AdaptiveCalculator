@@ -6,7 +6,6 @@
   color: #333;
 }
 
-/* Стили формы */
 .input-form {
   background: #ffffff;
   padding: 25px;
@@ -28,7 +27,6 @@
   font-size: 15px;
 }
 
-/* Стили для всех инпутов */
 .date-input,
 .text-input,
 .number-input {
@@ -193,5 +191,61 @@
   
   .worker-card {
     width: 100%;
+  }
+}
+
+.calculator-container.sidebar-mode {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-mode .input-form {
+  padding: 12px;
+}
+
+.sidebar-mode .input-form.compact-form .input-group {
+  margin-bottom: 12px;
+}
+
+.sidebar-mode .input-form.compact-form .input-label {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.sidebar-mode .input-form.compact-form .date-input,
+.sidebar-mode .input-form.compact-form .text-input,
+.sidebar-mode .input-form.compact-form .number-input {
+  padding: 8px 10px;
+  font-size: 13px;
+  max-width: 100%;
+}
+
+.sidebar-mode .input-form.compact-form .button-group {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-mode .input-form.compact-form .add-button-complete,
+.sidebar-mode .input-form.compact-form .add-button-clear {
+  padding: 8px 12px;
+  font-size: 13px;
+  width: 100%;
+  margin-top: 0;
+}
+
+.sidebar-mode .input-form.compact-form .salary-display {
+  font-size: 13px;
+  padding: 6px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .calculator-container.sidebar-mode {
+    padding: 0;
+  }
+  
+  .sidebar-mode .input-form.compact-form {
+    padding: 10px;
   }
 }

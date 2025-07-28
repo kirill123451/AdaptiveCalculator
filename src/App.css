@@ -14,25 +14,111 @@
   padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.table-page {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.table-controls {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toggle-sidebar-btn {
+  padding: 8px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.toggle-sidebar-btn:hover {
+  background-color: #45a049;
+}
+
+.table-layout {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+.table-layout {
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.table-layout.sidebar-open {
+  margin-right: 350px;
+}
+
+@media (max-width: 768px) {
+  .table-layout.sidebar-open {
+    margin-right: 280px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.table-page {
+  flex: 1;
+  padding: 20px;
+}
+
+.table-layout {
+  display: flex;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.table-layout.sidebar-open {
+  grid-template-columns: 1fr 300px;
+}
+
+@media (max-width: 768px) {
+  .table-layout {
+    flex-direction: column;
+  }
+  
+  .table-layout.sidebar-open {
+    grid-template-columns: 1fr;
   }
 }
 
-.card {
-  padding: 2em;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.read-the-docs {
-  color: #888;
+.table-page {
+  flex: 1;
+  padding: 20px;
+}
+
+.table-layout {
+  display: flex;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.table-layout.sidebar-open {
+  grid-template-columns: 1fr 300px;
+}
+
+@media (max-width: 768px) {
+  .table-layout {
+    flex-direction: column;
+  }
+  
+  .table-layout.sidebar-open {
+    grid-template-columns: 1fr;
+  }
 }

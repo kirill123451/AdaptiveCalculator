@@ -13,6 +13,28 @@ function App() {
   const [calculators, setCalculators] = useState([{ id: 1 }])
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
+  const handleAddWorker = (worker: Omit<Worker, 'id'>) => {
+    setWorkers(prev => [
+      ...prev,
+      {
+        ...worker,
+        id: Date.now() 
+      }
+    ])
+  }
+
+  const handleDeleteWorker = (id: number) => {
+    setWorkers(prev => prev.filter(worker => worker.id !== id))
+  }
+
+  const handleUpdateWorker = (updatedWorker: Worker) => {
+    setWorkers(prev => 
+      prev.map(worker => 
+        worker.id === updatedWorker.id ? updatedWorker : worker
+      )
+    )
+  }
+
   const addCalculator = () => {
     const newId = calculators.length > 0 ? Math.max(...calculators.map(c => c.id)) + 1 : 1
     setCalculators([...calculators, { id: newId }])
@@ -20,6 +42,10 @@ function App() {
 
   const delCalculator = (id: number) => {
     setCalculators(calculators.filter(c => c.id !== id))
+  }
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev)
   }
 
   return (
@@ -31,7 +57,7 @@ function App() {
             path="/"
             element={
               <>
-                <Calculator onAddWorker={(worker) => setWorkers(p => [...p, worker])} />
+                <Calculator onAddWorker={handleAddWorker} />
                 <WorkerCard workers={workers} />
               </>
             }
@@ -39,20 +65,23 @@ function App() {
           <Route
             path="/table"
             element={
-              <>
-                <TableWorkers 
-                  workers={workers} 
-                  onToggleSidebar={() => setIsSidebarOpen(prev => !prev)} 
-                />
-                {isSidebarOpen && (
+              <div className="table-page">
+                <div className={`table-layout ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+                  <TableWorkers 
+                    workers={workers} 
+                    onDeleteWorker={handleDeleteWorker}
+                    onUpdateWorker={handleUpdateWorker}
+                  />
                   <SideCalculators
+                    isOpen={isSidebarOpen}
+                    onClose={toggleSidebar}
                     addCalculator={addCalculator}
                     delCalculator={delCalculator}
                     calculators={calculators}
-                    onAddWorker={(worker) => setWorkers(p => [...p, worker])}
+                    onAddWorker={handleAddWorker}
                   />
-                )}
-              </>
+                </div>
+              </div>
             }
           />
         </Routes>
